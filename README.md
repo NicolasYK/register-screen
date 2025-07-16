@@ -16,4 +16,4 @@ ___
 
 <h2>Imagem</h2>
 
-<p>Falta adicionar...</p>
+<img src="./img-git/screen_01.png" alt="Imagem da tela principal">

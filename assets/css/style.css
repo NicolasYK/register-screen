@@ -18,6 +18,7 @@
     --primary-color-focus: rgb(113, 168, 206);
 }
 
+/* Adicionando cor no corpo*/
 body{
     margin: 0;
     padding: 0;
@@ -31,6 +32,7 @@ body h2 {
     padding: 1vh;
 }
 
+/* Criando o layout de cadastro*/
 .container{
     max-width: 25%;
     margin: 10vh auto;
@@ -39,7 +41,8 @@ body h2 {
     background: rgb(255, 255, 255);
 }
 
-form input, form label, form button{
+/* Configurando o layout do formulário*/
+form *{
     font-size: 2vb;
     display: block;
     height: 100%;
@@ -72,4 +75,10 @@ form button{
 form button:hover{
     color: rgb(255, 255, 255);
     background: var(--primary-color-dark);
+}
+
+/* Implementando estilos do js */
+.invalid-field{
+    color: rgb(255, 49, 49);
+    font-size: 12px;
 }
