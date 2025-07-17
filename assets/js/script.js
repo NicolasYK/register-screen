@@ -10,6 +10,9 @@ class ValidateForm {
         this.#form.addEventListener('submit', e =>{
             e.preventDefault();
             this.#checkField();
+            if(this.#checkField()){
+                alert('Formulário enviado');
+            }
         });
     }
 
@@ -33,10 +36,9 @@ class ValidateForm {
             }
 
             if(field.classList.contains('input-name')){
-                let valid = true;
-                const username = field.value;
-                if(field.value.length < 3 || field.value.length > 12){
-                    this.#createAlert(field, `O campo ${label} precisa ter ao mínimo 3 a 12 caracteres`);
+                const username = field.value.trim();
+                if(username.length < 3){
+                    this.#createAlert(field, `O campo ${label} precisa ter ao mínimo 4 caracteres.`);
                     valid = false;
                 }
                 
@@ -47,14 +49,18 @@ class ValidateForm {
             }
 
             if(field.classList.contains('input-email')){
-                
+                const email = field.value;
+                if(!email.includes('@')){
+                    this.#createAlert(field, `o email digitado não é um email.`);
+                    valid = false;
+                }
             }
             
             if(field.classList.contains('input-password')){
                 firstPassword = field.value;
                 passwordName = label;
                 if(firstPassword.length < 6 || firstPassword.length > 12){
-                    this.#createAlert(field, `É necessário digitar no mínimo 12 letras.`);
+                    this.#createAlert(field, `A senha precisa conter ao menos 6 ou mais de 12 caracteres..`);
                     valid = false;
                 }
             }
@@ -68,8 +74,8 @@ class ValidateForm {
                 }
             }
 
-            return valid;
         }
+        return valid;
     }
 
     #validatingCPF(field){
