@@ -29,25 +29,56 @@ class ValidateForm {
             }
 
             if(field.classList.contains('input-cpf')){
+                if(!this.#validatingCPF(field)) valid = false;
+            }
+
+            if(field.classList.contains('input-name')){
+                let valid = true;
+                const username = field.value;
+                if(field.value.length < 3 || field.value.length > 12){
+                    this.#createAlert(field, `O campo ${label} precisa ter ao mínimo 3 a 12 caracteres`);
+                    valid = false;
+                }
                 
-                valid = false;
+                if(!username.match(/^[\p{L}\p{N} ]+$/u)){
+                    this.#createAlert(field, `O nome do usuário precisa conter letras ou números`);
+                    valid = false;
+                }
+            }
+
+            if(field.classList.contains('input-email')){
+                
             }
             
             if(field.classList.contains('input-password')){
                 firstPassword = field.value;
                 passwordName = label;
-                if(firstPassword.length < 12){
+                if(firstPassword.length < 6 || firstPassword.length > 12){
                     this.#createAlert(field, `É necessário digitar no mínimo 12 letras.`);
+                    valid = false;
                 }
             }
 
             if(field.classList.contains('input-validation-password')){
+                firstPassword = field.value;
                 confirmPassword = field.value;
                 if(firstPassword != confirmPassword){
                     this.#createAlert(field, `Os campos "${passwordName}s" precisam ser iguais.`)
+                    valid = false;
                 }
             }
+
+            return valid;
         }
+    }
+
+    #validatingCPF(field){
+        const cpf = new checkCPF();
+        if(!cpf.validCPF(field.value)){
+            this.#createAlert(field, 'O CPF é invalido.');
+            return false;
+        }
+        return true;
     }
 
     #removeAlertField(){
